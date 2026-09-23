@@ -2,7 +2,7 @@
 
 A high-performance load balancing setup using Nginx in Docker, routing traffic across multiple backend Node/service instances with built-in passive health checks.
 
-## Architecture Diagram
+## Architecture MindMap Diagram
 
 ```mermaid
 mindmap
@@ -22,4 +22,20 @@ mindmap
       Timeouts
         Connect: 5s
         Read: 10s
+
+```
+
+## Architecture Flow Diagram
+
+```mermaid
+flowchart LR
+    U[Internet Users] --> DNS[DNS]
+    DNS --> LB[Load Balancer]
+
+    LB --> A[user-service1:8001]
+    LB --> B[user-service2:8001]
+
+    A --> DB[(Database)]
+    B --> DB
+
 ```
