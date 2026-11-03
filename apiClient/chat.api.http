@@ -1,0 +1,14 @@
+@API_BASE_URL_LOCAL = http://localhost:8001/api/v1
+
+
+
+# Get
+
+
+
+# creating a new chat session
+POST {{API_BASE_URL_LOCAL}}/chat/new-chat
+Content-Type: application/json
+
+
+
