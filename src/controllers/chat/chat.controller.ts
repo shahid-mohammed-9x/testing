@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import httpErrors from "http-errors";
 import errorHandling, { AppError } from "../../utils/errorHandling.util";
 import responseHandlingUtil from "../../utils/responseHandling.util";
-import ChatMessageModel, { IMessage } from "../../schema/chat.model";
+import ChatMessageModel from "../../schema/chat.model";
 import { parseUserAgent } from "../../helpers/analytics.helper";
 
 export const createNewChatSessionController = async (

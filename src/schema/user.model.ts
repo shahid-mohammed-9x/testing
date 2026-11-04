@@ -1,4 +1,4 @@
-import mongoose, { Document, Model, Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 import modelConstants from "../constants/model.constant";
 
 export type UserRole = "admin" | "user";
@@ -33,9 +33,6 @@ const userSchema = new Schema<UserInterface>(
   { timestamps: true },
 );
 
-const UserModel: Model<UserInterface> = mongoose.model(
-  modelConstants.user,
-  userSchema,
-);
+const UserModel = mongoose.model(modelConstants.user, userSchema);
 
 export default UserModel;
