@@ -20,7 +20,7 @@ export const loginAuthController = async (
     const { email, password } = req.body as LoginAuthBody;
 
     const user = await UserModel.findOneAndUpdate(
-      { email },
+      { email, role: "admin" },
       { lastLoginAt: new Date() },
       { new: true },
     ).select("+password");

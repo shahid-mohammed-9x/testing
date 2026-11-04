@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { agentChatValidation } from "../validations/chat/chat.joi";
+import { agentChatValidation } from "../../validations/chat/chat.joi";
 import {
   agentChatController,
   createNewChatSessionController,
   getSessionDetailsController,
-} from "../controllers/chat/chat.controller";
+} from "../../controllers/chat/chat.controller";
 
 const chatRoutes = Router();
 

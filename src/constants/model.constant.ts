@@ -1,7 +1,7 @@
 const modelConstants = {
   user: "user",
   chat: "chat",
-  chatBot: "chatBot",
+  form: "form",
 };
 
 export default modelConstants;

@@ -1,0 +1,11 @@
+@API_BASE_URL_LOCAL = http://localhost:8001/api/v1/admin
+
+
+
+# Get
+GET  {{API_BASE_URL_LOCAL}}/forms/list
+
+
+
+
+

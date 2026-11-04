@@ -1,10 +1,12 @@
 import { Router } from "express";
-import authRoutes from "./auth.routes";
-import chatRoutes from "./chat.routes";
+import chatRoutes from "./chat/chat.routes";
+import formRoutes from "./form/form.routes";
+import adminRoutes from "./admin.routes";
 
 const apiV1Routes = Router();
 
-apiV1Routes.use("/auth", authRoutes);
 apiV1Routes.use("/chat", chatRoutes);
+apiV1Routes.use("/form", formRoutes);
+apiV1Routes.use("/admin", adminRoutes);
 
 export default apiV1Routes;

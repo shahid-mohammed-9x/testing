@@ -2,7 +2,7 @@ import { Response, NextFunction, Request } from "express";
 import httpErrors from "http-errors";
 import errorHandling, { AppError } from "../utils/errorHandling.util";
 import { verifyAccessToken } from "../utils/jwt.util";
-import UserModel from "../schema/user.model";
+import UserModel, { UserRole } from "../schema/user.model";
 import config from "../configs/index.config";
 import logger from "../configs/logger.config";
 
@@ -37,6 +37,7 @@ export const Authentication = async (
       _id: userExist?._id,
       email: userExist?.email,
       name: userExist?.name,
+      role: userExist?.role,
     };
     logger.info(`name : ${userExist.name} email: ${userExist.email}`);
     next();
@@ -47,7 +48,7 @@ export const Authentication = async (
 
 export const DevelopmentAuthentication = async (
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction,
 ) => {
   try {
@@ -64,6 +65,7 @@ export const DevelopmentAuthentication = async (
       _id: userExist?._id,
       email: userExist?.email,
       name: userExist?.name,
+      role: userExist?.role,
     };
     logger.info(`name : ${userExist.name} email: ${userExist.email}`);
 
@@ -74,13 +76,12 @@ export const DevelopmentAuthentication = async (
 };
 
 // authorization depending  upon a role
-// export const Authorization = (...roles: string[]) => {
-//   return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-//     if (!roles.includes(req?.authUser?.role)) {
-//       res.clearCookie("access_token");
-//       res.clearCookie("refresh_token");
-//       return next(httpErrors.Unauthorized("Authentication token required"));
-//     }
-//     next();
-//   };
-// };
+export const Authorization = (...roles: UserRole[]) => {
+  return (req: Request, _: Response, next: NextFunction) => {
+    const currentRole = req?.authUser?.role || null;
+    if (currentRole && !roles.includes(currentRole)) {
+      return next(httpErrors.Unauthorized("Authentication token required"));
+    }
+    next();
+  };
+};

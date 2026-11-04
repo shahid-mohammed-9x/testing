@@ -1,0 +1,22 @@
+@API_BASE_URL_LOCAL = http://localhost:8001/api/v1
+
+
+
+# Get
+
+
+
+# Submit a new form details
+POST {{API_BASE_URL_LOCAL}}/form/new-submission
+Content-Type: application/json
+
+{
+  "name": " Doe",
+  "email": "doe@example.com",
+  "companyName": "ABC Technologies",
+  "phoneNumber": "+919876543210",
+  "category": "Test",
+  "message": "I would like to know more about your services."
+}
+
+
