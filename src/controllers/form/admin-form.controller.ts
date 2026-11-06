@@ -69,7 +69,7 @@ export const getFormsListController = async (
       data: {
         forms,
         pagination: {
-          totalForms,
+          totalDocs: totalForms,
           totalPages,
           currentPage,
           limit: perPage,
