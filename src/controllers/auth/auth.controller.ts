@@ -23,7 +23,9 @@ export const loginAuthController = async (
       { email, role: "admin" },
       { lastLoginAt: new Date() },
       { new: true },
-    ).select("+password");
+    )
+      .select("+password")
+      .lean();
     if (!user) {
       return next(httpError.BadRequest("Invalid Email or Password"));
     }
@@ -35,6 +37,8 @@ export const loginAuthController = async (
 
     const accessToken = await createAccessToken(user?._id?.toString());
 
+    const { password: _, ...userDetails } = user;
+
     logger.info(
       "controllers - users - auth.controller - loginAuthController - End",
     );
@@ -42,6 +46,7 @@ export const loginAuthController = async (
       statusCode: 200,
       message: "User logged in successfully",
       data: {
+        userDetails,
         accessToken,
       },
     });
@@ -63,8 +68,6 @@ export const logoutAuthController = async (
     logger.info(
       "controllers - users - auth.controller - logoutAuthController - Start",
     );
-    res.clearCookie("access_token");
-    res.clearCookie("refresh_token");
 
     logger.info(
       "controllers - users - auth.controller - logoutAuthController - End",
